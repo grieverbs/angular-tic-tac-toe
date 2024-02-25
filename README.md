@@ -24,3 +24,12 @@ npm install
 cd tick-tac-toe
 ng serve --open
 ```
+
+# Visual Code maybe useful extensions
+* Angular Essentials (Version 16)
+
+# Notes on angular cli
+```sh
+# quick start to generate components.  Squares are kinda the base object in tick tac toe
+ng generate component square
+```
