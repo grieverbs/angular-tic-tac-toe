@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './square.component.css'
 })
 export class SquareComponent {
-
+  text = "imma square";
 }
