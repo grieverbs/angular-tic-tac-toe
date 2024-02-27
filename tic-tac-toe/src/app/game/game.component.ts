@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
@@ -13,6 +13,7 @@ export class GameComponent implements OnInit {
   isXPlayer: boolean = true;
   squares: any[] = Array(9).fill(null);
   message: string = "";
+  // You can kinda see the grid in the first 3 rows.  Then we check the columns and diagonals.
   winningCombo: any[] = [
     [0, 1, 2],
     [3, 4, 5],
@@ -24,6 +25,8 @@ export class GameComponent implements OnInit {
     [6, 4, 2],
   ];
 
+  test: string ="X";
+
   constructor() {}
 
   ngOnInit(): void {
@@ -33,13 +36,13 @@ export class GameComponent implements OnInit {
     return this.isXPlayer ? "X" : "O";
   }
 
-  clickHandler(index: number) {
-    // if validity is true, swap player and fill square.
-    this.isXPlayer = !this.isXPlayer;
-  }
-
-  scanAndRender() {
-
+  markPlayer(index: number) {
+    // if square null, mark player into square
+    if (this.squares[index] == null) {
+      this.squares.splice(index, 1, this.player);
+      // Swap player
+      this.isXPlayer = !this.isXPlayer;
+    }
   }
 
   newGame() {

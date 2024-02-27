@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-square',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './square.component.css'
 })
 export class SquareComponent {
-  text = "imma square";
+  // https://angular.io/api/core/Input
+  // Avoid using the same name between parent and child components
+  @Input() squareType!: "X" | "O";  // Limiting value style and allows for null
 }

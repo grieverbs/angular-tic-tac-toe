@@ -36,3 +36,6 @@ ng generate component square
 # parent called 'game' to run the game
 ng generate component game
 ```
+
+# Notes on Angular
+https://angular.io/extended-diagnostics/NG8103, the CommonModule is what makes ngFor works for an example.
