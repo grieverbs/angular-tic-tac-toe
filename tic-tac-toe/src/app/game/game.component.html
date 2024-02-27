@@ -1,0 +1,9 @@
+<div>
+    <h2>Player: {{ player }}</h2>
+    <button (click)="newGame()">Reset Game!</button>
+    <div class="grid">
+        <!-- Ideally this renders 9 squares.  In a row or column.  CSS on the grid should move or shift it -->
+        <app-square *ngFor="let square of squares; let index = index" [squareType]="square" (click)="markPlayer(index)">
+        </app-square>
+    </div>
+</div>

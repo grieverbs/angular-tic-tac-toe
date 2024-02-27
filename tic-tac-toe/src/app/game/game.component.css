@@ -1,0 +1,12 @@
+.grid {
+    display: grid;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns */
+    /* specifying width of each column.  3 columns, 3 lengths */
+    grid-template-columns: 100px 100px 100px;
+}
+
+app-square {
+    border: 1px black solid;
+    /* Might as well match the height to width to make a square */
+    height: 100px;
+}
