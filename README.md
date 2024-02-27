@@ -32,4 +32,7 @@ ng serve --open
 ```sh
 # quick start to generate components.  Squares are kinda the base object in tick tac toe
 ng generate component square
+
+# parent called 'game' to run the game
+ng generate component game
 ```

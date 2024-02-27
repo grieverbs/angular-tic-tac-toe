@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SquareComponent } from '../square/square.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [],
+  imports: [SquareComponent, CommonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
@@ -26,6 +28,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   get player() {
     return this.isXPlayer ? "X" : "O";
   }
@@ -37,5 +40,11 @@ export class GameComponent implements OnInit {
 
   scanAndRender() {
 
+  }
+
+  newGame() {
+    this.isXPlayer = true;
+    this.squares = Array(9).fill(null);
+    this.message = "";
   }
 }

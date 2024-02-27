@@ -1,5 +1,8 @@
 <div>
-    <h1>Tick Tac Toe!!!!</h1>
-
     <h2>Player: {{ player }}</h2>
+
+    <div class="grid">
+        <app-square *ngFor="let square of squares">
+        </app-square>
+    </div>
 </div>
