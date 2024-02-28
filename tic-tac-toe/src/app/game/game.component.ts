@@ -11,8 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class GameComponent implements OnInit {
   isXPlayer: boolean = true;
+  gameInitialized: boolean = false;
   squares: any[] = Array(9).fill(null);
-  message: string = "";
+  winner: string = "";
   // You can kinda see the grid in the first 3 rows.  Then we check the columns and diagonals.
   winningCombo: any[] = [
     [0, 1, 2],
@@ -25,8 +26,6 @@ export class GameComponent implements OnInit {
     [6, 4, 2],
   ];
 
-  test: string ="X";
-
   constructor() {}
 
   ngOnInit(): void {
@@ -36,10 +35,16 @@ export class GameComponent implements OnInit {
     return this.isXPlayer ? "X" : "O";
   }
 
-  markPlayer(index: number) {
+  updateBoard(index: number) {
     // if square null, mark player into square
     if (this.squares[index] == null) {
+      this.gameInitialized = true;
       this.squares.splice(index, 1, this.player);
+      
+      this.checkWin(this.player);
+      if (this.winner == "" && !this.hasEmptySquare()) {
+        this.winner = "Draw"
+      }
       // Swap player
       this.isXPlayer = !this.isXPlayer;
     }
@@ -48,6 +53,27 @@ export class GameComponent implements OnInit {
   newGame() {
     this.isXPlayer = true;
     this.squares = Array(9).fill(null);
-    this.message = "";
+    this.winner = "";
+    this.gameInitialized = false;
+  }
+
+  checkWin(player: string) {
+    this.winningCombo.forEach(combo => {
+      if (this.squares[combo[0]] == player && this.squares[combo[1]] == player && this.squares[combo[2]] == player) {
+        this.winner = player;
+        return;
+      }
+    });
+  }
+
+  hasEmptySquare() {
+    let result = false;
+    this.squares.forEach(square => {
+      if (square == null) {
+        result = true;
+        return;
+      };
+    });
+    return result;
   }
 }

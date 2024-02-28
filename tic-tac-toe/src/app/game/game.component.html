@@ -1,9 +1,12 @@
 <div>
-    <h2>Player: {{ player }}</h2>
-    <button (click)="newGame()">Reset Game!</button>
-    <div class="grid">
+    <h2 *ngIf="winner == ''">Current Player: {{ player }}</h2>
+    <button (click)="newGame()" *ngIf="gameInitialized">Reset Game!</button>
+    <div *ngIf="winner == ''; else winnerBlock" class="grid">
         <!-- Ideally this renders 9 squares.  In a row or column.  CSS on the grid should move or shift it -->
-        <app-square *ngFor="let square of squares; let index = index" [squareType]="square" (click)="markPlayer(index)">
+        <app-square *ngFor="let square of squares; let index = index" [squareType]="square" (click)="updateBoard(index)">
         </app-square>
     </div>
+    <ng-template #winnerBlock>
+        <h2>Winner: {{ winner }}!!!!!</h2>
+    </ng-template>
 </div>
