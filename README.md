@@ -39,3 +39,11 @@ ng generate component game
 
 # Notes on Angular
 https://angular.io/extended-diagnostics/NG8103, the CommonModule is what makes ngFor works for an example.
+
+# Notes on CSS library, Material UI
+```sh
+ng add @angular/material
+#  I got an issue with no terminal detected.  Maybe because of cygwin?
+#  Below should be a fix
+ng add @angular/material --skip-confirmation
+```

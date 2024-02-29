@@ -10,3 +10,36 @@ app-square {
     /* Might as well match the height to width to make a square */
     height: 100px;
 }
+
+mat-grid-tile {
+    background: rgb(142, 204, 224);
+    color: white;
+    font-size:larger;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 20px #999;
+}
+
+mat-grid-tile:hover {
+    background: rgb(40, 145, 180);
+}
+
+mat-grid-tile::active {
+    background-color: rgb(8, 76, 99);
+    box-shadow: 0 5px #666;
+    transform: translateY(40px);
+  }
+
+.my-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+.reset-button {
+    margin-top: 40px;
+}
+
+.x-color {
+    color:coral;
+}
