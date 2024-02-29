@@ -10,3 +10,15 @@ app-square {
     /* Might as well match the height to width to make a square */
     height: 100px;
 }
+
+mat-grid-tile {
+    background: lightblue;
+    color: white;
+    font-size:larger;
+}
+
+.my-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}

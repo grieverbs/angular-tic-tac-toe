@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { CommonModule } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+
+
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [SquareComponent, CommonModule],
+  imports: [SquareComponent, CommonModule, MatGridListModule, MatButtonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })

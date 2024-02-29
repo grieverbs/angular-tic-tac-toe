@@ -1,12 +1,19 @@
 <div>
-    <h2 *ngIf="winner == ''">Current Player: {{ player }}</h2>
-    <button (click)="newGame()" *ngIf="gameInitialized">Reset Game!</button>
-    <div *ngIf="winner == ''; else winnerBlock" class="grid">
-        <!-- Ideally this renders 9 squares.  In a row or column.  CSS on the grid should move or shift it -->
-        <app-square *ngFor="let square of squares; let index = index" [squareType]="square" (click)="updateBoard(index)">
-        </app-square>
+    
+    <div class="my-container">
+        <h1>Tic Tac Toe!</h1>
+        <h2 *ngIf="winner == ''">Current Player: {{ player }}</h2>
+        <button (click)="newGame()" *ngIf="gameInitialized">Reset Game!</button>
+
+        <mat-grid-list cols="3" rowHeight="2:1" *ngIf="winner == ''; else winnerBlock">
+            <mat-grid-tile *ngFor="let square of squares; let index = index" (click)="updateBoard(index)"><h2>{{ square }}</h2></mat-grid-tile>
+        </mat-grid-list>
+        <ng-template #winnerBlock>
+            <h2>Winner: {{ winner }}!!!!!</h2>
+            <!-- Kinda a cheat way to disable the clicking (since I haven't figured disabling Material UI components) -->
+            <mat-grid-list cols="3" rowHeight="2:1">
+                <mat-grid-tile *ngFor="let square of squares; let index = index"><h2>{{ square }}</h2></mat-grid-tile>
+            </mat-grid-list>
+        </ng-template>
     </div>
-    <ng-template #winnerBlock>
-        <h2>Winner: {{ winner }}!!!!!</h2>
-    </ng-template>
 </div>
