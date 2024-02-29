@@ -39,3 +39,7 @@ mat-grid-tile::active {
 .reset-button {
     margin-top: 40px;
 }
+
+.x-color {
+    color:coral;
+}
