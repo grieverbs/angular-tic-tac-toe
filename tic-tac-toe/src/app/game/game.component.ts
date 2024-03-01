@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { StateService } from '../state.service';
+import { Game } from '../game';
 
 @Component({
   selector: 'app-game',
@@ -12,11 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
-export class GameComponent implements OnInit {
-  isXPlayer: boolean = true;
-  gameInitialized: boolean = false;
-  squares: any[] = Array(9).fill(null);
-  winner: string = "";
+export class GameComponent {
+  game: Game = new Game();
+
   // You can kinda see the grid in the first 3 rows.  Then we check the columns and diagonals.
   winningCombo: any[] = [
     [0, 1, 2],
@@ -29,41 +27,48 @@ export class GameComponent implements OnInit {
     [6, 4, 2],
   ];
 
-  constructor() {}
+  constructor(private stateService: StateService) {}
 
-  ngOnInit(): void {
+  ngAfterContentInit (): void {
+    let data = this.stateService.getState(); 
+    if (data) {
+      console.log(data);
+      this.game.isXPlayer = data.isXPlayer
+      this.game.gameInitialized = data.gameInitialized;
+      this.game.squares = data.squares;
+      this.game.winner = data.winner;
+    }
   }
 
   get player() {
-    return this.isXPlayer ? "X" : "O";
+    return this.game.isXPlayer ? "X" : "O";
   }
 
   updateBoard(index: number) {
     // if square null, mark player into square
-    if (this.squares[index] == null) {
-      this.gameInitialized = true;
-      this.squares.splice(index, 1, this.player);
+    if (this.game.squares[index] == null) {
+      this.game.gameInitialized = true;
+      this.game.squares.splice(index, 1, this.player);
       
       this.checkWin(this.player);
-      if (this.winner == "" && !this.hasEmptySquare()) {
-        this.winner = "Draw"
+      if (this.game.winner == "" && !this.hasEmptySquare()) {
+        this.game.winner = "Draw";
       }
       // Swap player
-      this.isXPlayer = !this.isXPlayer;
+      this.game.isXPlayer = !this.game.isXPlayer;
+      this.stateService.setState(this.game);
     }
   }
 
   newGame() {
-    this.isXPlayer = true;
-    this.squares = Array(9).fill(null);
-    this.winner = "";
-    this.gameInitialized = false;
+    this.game = new Game();
+    this.stateService.clearState();
   }
 
   checkWin(player: string) {
     this.winningCombo.forEach(combo => {
-      if (this.squares[combo[0]] == player && this.squares[combo[1]] == player && this.squares[combo[2]] == player) {
-        this.winner = player;
+      if (this.game.squares[combo[0]] == player && this.game.squares[combo[1]] == player && this.game.squares[combo[2]] == player) {
+        this.game.winner = player;
         return;
       }
     });
@@ -71,11 +76,11 @@ export class GameComponent implements OnInit {
 
   hasEmptySquare() {
     let result = false;
-    this.squares.forEach(square => {
+    this.game.squares.forEach(square => {
       if (square == null) {
         result = true;
         return;
-      };
+      }
     });
     return result;
   }
