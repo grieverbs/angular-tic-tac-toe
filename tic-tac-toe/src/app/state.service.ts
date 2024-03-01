@@ -15,7 +15,7 @@ export class StateService {
 
   getState() {
     let data = localStorage.getItem(this.storageName);
-    if (data) {
+    if (data && typeof data == "string") {
       return JSON.parse(data);
     }
     return null;

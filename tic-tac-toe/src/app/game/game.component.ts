@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { AiService } from '../ai.service';
 import { StateService } from '../state.service';
 import { Game } from '../game';
 
@@ -12,7 +13,7 @@ import { Game } from '../game';
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
   game: Game = new Game();
 
   // You can kinda see the grid in the first 3 rows.  Then we check the columns and diagonals.
@@ -27,12 +28,16 @@ export class GameComponent {
     [6, 4, 2],
   ];
 
-  constructor(private stateService: StateService) {}
+  constructor(private stateService: StateService, private aiService: AiService) {
+  }
+  ngOnInit(): void {
+    console.log("ngOnIt");
+    fetch("http://localhost:4201/test").then(console.log).catch(console.log);
+  }
 
   ngAfterContentInit (): void {
     let data = this.stateService.getState(); 
     if (data) {
-      console.log(data);
       this.game.isXPlayer = data.isXPlayer
       this.game.gameInitialized = data.gameInitialized;
       this.game.squares = data.squares;
