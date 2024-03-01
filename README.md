@@ -41,6 +41,7 @@ ng generate component game
 https://angular.io/extended-diagnostics/NG8103, the CommonModule is what makes ngFor works for an example.
 
 # Notes on CSS library, Material UI
+[Getting Started](https://material.angular.io/guide/getting-started)
 ```sh
 ng add @angular/material
 #  I got an issue with no terminal detected.  Maybe because of cygwin?
