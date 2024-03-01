@@ -32,7 +32,6 @@ export class GameComponent {
   ngAfterContentInit (): void {
     let data = this.stateService.getState(); 
     if (data) {
-      console.log(data);
       this.game.isXPlayer = data.isXPlayer
       this.game.gameInitialized = data.gameInitialized;
       this.game.squares = data.squares;
