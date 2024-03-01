@@ -1,16 +1,16 @@
 <div>
     <div class="my-container">
         <h1>Tic Tac Toe!</h1>
-        <h2 *ngIf="winner == ''">Current Player: {{ player }}</h2>
+        <h2 *ngIf="game.winner == ''">Current Player: {{ player }}</h2>
 
-        <mat-grid-list cols="3" rowHeight="2:1" *ngIf="winner == ''; else winnerBlock">
-            <mat-grid-tile *ngFor="let square of squares; let index = index" (click)="updateBoard(index)" [ngClass]="{'x-color': square == 'X'}"><h2>{{ square }}</h2></mat-grid-tile>
+        <mat-grid-list cols="3" rowHeight="2:1" *ngIf="game.winner == ''; else winnerBlock">
+            <mat-grid-tile *ngFor="let square of game.squares; let index = index" (click)="updateBoard(index)" [ngClass]="{'x-color': square == 'X'}"><h2>{{ square }}</h2></mat-grid-tile>
         </mat-grid-list>
         <ng-template #winnerBlock>
-            <h2>Winner: {{ winner }}!!!!!</h2>
+            <h2>Winner: {{ game.winner }}!!!!!</h2>
             <!-- Kinda a cheat way to disable the clicking (since I haven't figured disabling Material UI components) -->
             <mat-grid-list cols="3" rowHeight="2:1">
-                <mat-grid-tile *ngFor="let square of squares; let index = index" [ngClass]="{'x-color': square == 'X'}"><h2>{{ square }}</h2></mat-grid-tile>
+                <mat-grid-tile *ngFor="let square of game.squares; let index = index" [ngClass]="{'x-color': square == 'X'}"><h2>{{ square }}</h2></mat-grid-tile>
             </mat-grid-list>
         </ng-template>
         <div class="reset-button">
