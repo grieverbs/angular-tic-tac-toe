@@ -48,3 +48,14 @@ ng add @angular/material
 #  Below should be a fix
 ng add @angular/material --skip-confirmation
 ```
+
+# Docker Container/App
+## I did this on a raspberry pi, don't hack me
+```sh
+# from the root directory of angular-tic-tack-toe
+sudo docker build -t name-image .
+# To check your image
+sudo docker image ls 
+# ideally a port that's not well known.
+sudo docker run --name name-container -d -p XXXX:80 name-image 
+```
